@@ -1,0 +1,7 @@
+package com.example.myblog.repository;
+
+import com.example.myblog.domain.Posts;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PostsRepository extends JpaRepository<Posts, Long> {
+}
