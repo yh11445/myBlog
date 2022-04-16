@@ -2,6 +2,7 @@ package com.example.myblog.web;
 
 import com.example.myblog.domain.Posts;
 import com.example.myblog.service.PostsService;
+import com.example.myblog.web.dto.PostsModifyRequestDto;
 import com.example.myblog.web.dto.PostsResponseDto;
 import com.example.myblog.web.dto.PostsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -33,5 +34,10 @@ public class PostsApiController {
 		Page<Posts> posts = postsService.getPosts(pageable);
 
 		return ResponseEntity.status(HttpStatus.OK).body(posts);
+	}
+
+	@PutMapping("/api/v1/post/{id}")
+	public Long modifyPost(@PathVariable Long id, @RequestBody PostsModifyRequestDto dto) {
+		return postsService.modifyPost(id, dto);
 	}
 }
