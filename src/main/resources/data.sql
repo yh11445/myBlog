@@ -1,0 +1,9 @@
+insert into posts (`title`, `content`, `author`, `created_date`, `modified_date`) values ('제목1', '내용1', '작성자1', now(), now());
+insert into posts (`title`, `content`, `author`, `created_date`, `modified_date`) values ('제목2', '내용2', '작성자2', now(), now());
+insert into posts (`title`, `content`, `author`, `created_date`, `modified_date`) values ('제목3', '내용3', '작성자1', now(), now());
+insert into posts (`title`, `content`, `author`, `created_date`, `modified_date`) values ('제목4', '내용4', '작성자2', now(), now());
+insert into posts (`title`, `content`, `author`, `created_date`, `modified_date`) values ('제목5', '내용5', '작성자3', now(), now());
+insert into posts (`title`, `content`, `author`, `created_date`, `modified_date`) values ('제목6', '내용6', '작성자3', now(), now());
+insert into posts (`title`, `content`, `author`, `created_date`, `modified_date`) values ('제목7', '내용7', '작성자3', now(), now());
+insert into posts (`title`, `content`, `author`, `created_date`, `modified_date`) values ('제목8', '내용8', '작성자3', now(), now());
+insert into posts (`title`, `content`, `author`, `created_date`, `modified_date`) values ('제목9', '내용9', '작성자3', now(), now());

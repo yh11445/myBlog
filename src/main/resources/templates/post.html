@@ -6,16 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>글 조회하기</title>
-
-    <!-- Bootstrap -->
     <link href="/css/bootstrap.css" rel="stylesheet">
-
 </head>
+
 <body>
-<h1></h1>
-<div></div>
-<div></div>
-<div></div>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title" id="title"></h3>
+        </div>
+        <div class="panel-body" id="content"></div>
+        <div class="panel-footer" id="author"></div>
+    </div>
+
+</div>
+
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -23,13 +28,18 @@
 <script src="/js/bootstrap.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
+        let id = [[${id}]];
+        console.log(id);
         $.ajax({
             type : 'GET',
-            url : '/api/v1/post/1',
+            url : '/api/v1/post/' + id,
             // contentType : 'application/json; charset=UTF-8',
             dataType : 'json',
             success : function(resp) {
                 console.log(resp.title);
+                $('#title').text(resp.title);
+                $('#content').text(resp.content);
+                $('#author').text(resp.author);
             },
             error : function(resp){
                 alert('error');

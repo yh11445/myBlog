@@ -5,18 +5,58 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Bootstrap 101 Template</title>
-
-  <!-- Bootstrap -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-
+  <title>글 목록</title>
+  <link href="/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-<h1>Hello, world!</h1>
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+
+<div class="container">
+  <div class="jumbotron">
+    <h1>Welcome To MyBlog</h1>
+  </div>
+
+  <table id="table" class="table">
+    <tr id="first">
+      <td>#</td>
+      <td>제목</td>
+      <td>내용</td>
+      <td>작성자</td>
+      <td>작성일시</td>
+    </tr>
+
+  </table>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $.ajax({
+      type : 'GET',
+      url : '/api/v1/posts',
+      // contentType : 'application/json; charset=UTF-8',
+      dataType : 'json',
+      success : function(resp) {
+        console.log(resp);
+        let content = resp.content;
+        console.log(content);
+        $.each(content, function (i) {
+          $('#first').append(
+                  '<tr>'+
+                    '<td>' + content[i].id + '</td>'+
+                    '<td>'+ content[i].title + '</td>'+
+                  '<td>'+ content[i].content + '</td>'+
+                  '<td>'+ content[i].author + '</td>'+
+                  '<td>'+ content[i].createdDate+ '</td>'+
+                  '</tr>'
+          );
+        });
+      },
+      error : function(resp){
+        alert('error');
+      }
+    });
+  });
+</script>
 </body>
 </html>

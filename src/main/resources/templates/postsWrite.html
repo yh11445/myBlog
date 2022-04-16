@@ -6,21 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>글 작성하기</title>
-
-  <!-- Bootstrap -->
   <link href="/css/bootstrap.css" rel="stylesheet">
-
 </head>
 <body>
-<h1>글 작성하기</h1>
 
-<form id="saveForm">
-  제목 <input type="text" name="title">
-  내용 <input type="text" name="content">
-  작성자 <input type="text" name="author">
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label>제목</label>
+      <input type="text" class="form-control" name="title">
+    </div>
+    <div class="form-group">
+      <label>내용</label>
+      <textarea id="textarea" class="form-control" name="content" rows="10"></textarea>
+    </div>
+    <div class="form-group">
+      <label>작성자</label>
+      <input type="text" class="form-control" name="author">
+    </div>
 
-  <button type="button" id="register">저장</button>
-</form>
+    <button type="button" class="btn btn-default" id="register">저장</button>
+  </form>
+</div>
+
+
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -31,7 +40,7 @@
   $(document).ready(function() {
     $('#register').click(function(e) {
       let title = $('input[name=title]').val();
-      let content = $('input[name=content]').val();
+      let content = $('#textarea').val();
       let author = $('input[name=author]').val();
 
       let data = {'title' : title, 'content' : content, 'author' : author};
@@ -42,11 +51,11 @@
         contentType : 'application/json; charset=UTF-8',
         dataType : 'json',
         data : JSON.stringify(data),
-        success : function(result) {
-          alert(result);
+        success : function(resp) {
+          $(location).attr('href', '/posts/' + resp);
         },
         error : function(){
-          alert('ajax 통신오류');
+          alert('error');
         }
       });
     });

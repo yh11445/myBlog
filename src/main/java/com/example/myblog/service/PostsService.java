@@ -5,6 +5,8 @@ import com.example.myblog.repository.PostsRepository;
 import com.example.myblog.web.dto.PostsResponseDto;
 import com.example.myblog.web.dto.PostsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -12,6 +14,10 @@ import org.springframework.stereotype.Service;
 public class PostsService {
 
 	private final PostsRepository repository;
+
+	public Page<Posts> getPosts(Pageable pageable) {
+		return repository.findAll(pageable);
+	}
 
 	public Long savePost(PostsSaveRequestDto dto) {
 		return repository.save(dto.toEntity()).getId();
