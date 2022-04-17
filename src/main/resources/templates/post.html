@@ -11,6 +11,7 @@
 
 <body>
 <div class="container">
+    <div class="h1">조회하기</div>
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title" id="title"></h3>
@@ -19,12 +20,11 @@
         <div class="panel-footer" id="author"></div>
     </div>
 
+    <button type="button" class="btn btn-default" id="modify">수정하기</button>
+    <button type="button" class="btn btn-default" id="goList">목록</button>
 </div>
 
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/js/bootstrap.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -33,7 +33,6 @@
         $.ajax({
             type : 'GET',
             url : '/api/v1/post/' + id,
-            // contentType : 'application/json; charset=UTF-8',
             dataType : 'json',
             success : function(resp) {
                 console.log(resp.title);
@@ -44,6 +43,14 @@
             error : function(resp){
                 alert('error');
             }
+        });
+
+        $('#modify').click(function(e) {
+            $(location).attr('href', '/posts/modify/' + id);
+        });
+
+        $('#goList').click(function(e) {
+            $(location).attr('href', '/posts');
         });
     });
 </script>

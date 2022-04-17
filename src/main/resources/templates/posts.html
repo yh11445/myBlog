@@ -17,16 +17,23 @@
     <h1>Welcome To MyBlog</h1>
   </div>
 
-  <table id="table" class="table">
-    <tr id="first">
-      <td>#</td>
-      <td>제목</td>
-      <td>내용</td>
-      <td>작성자</td>
-      <td>작성일시</td>
-    </tr>
+  <div class="button">
+    <button id="write" type="button" class="btn btn-primary">작성하기</button>
+  </div>
 
-  </table>
+  <div class="table">
+    <table id="table" class="table">
+      <tr id="first">
+        <td>#</td>
+        <td>제목</td>
+        <td>내용</td>
+        <td>작성자</td>
+        <td>작성일시</td>
+        <td>수정일시</td>
+      </tr>
+    </table>
+  </div>
+
 </div>
 
 <script type="text/javascript">
@@ -41,13 +48,14 @@
         let content = resp.content;
         console.log(content);
         $.each(content, function (i) {
-          $('#first').append(
-                  '<tr>'+
-                    '<td>' + content[i].id + '</td>'+
-                    '<td>'+ content[i].title + '</td>'+
+          $('#first').after(
+                  '<tr style="cursor: pointer" onclick="location.href=\'\/posts\/' + content[i].id + '\'">'+
+                  '<td>'+ content[i].id + '</td>'+
+                  '<td>'+ content[i].title + '</td>'+
                   '<td>'+ content[i].content + '</td>'+
                   '<td>'+ content[i].author + '</td>'+
                   '<td>'+ content[i].createdDate+ '</td>'+
+                  '<td>'+ content[i].modifiedDate+ '</td>'+
                   '</tr>'
           );
         });
@@ -55,6 +63,10 @@
       error : function(resp){
         alert('error');
       }
+    });
+
+    $('#write').click(function (e) {
+      $(location).attr('href', '/posts/write')
     });
   });
 </script>

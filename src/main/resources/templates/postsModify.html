@@ -5,13 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>글 작성하기</title>
+  <title>글 수정하기</title>
   <link href="/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="container">
-  <div class="h1">작성하기</div>
+  <div class="h1">수정하기</div>
   <form>
     <div class="form-group">
       <label>제목</label>
@@ -23,10 +23,10 @@
     </div>
     <div class="form-group">
       <label>작성자</label>
-      <input type="text" class="form-control" name="author">
+      <input type="text" class="form-control" name="author" readonly>
     </div>
 
-    <button type="button" class="btn btn-default" id="register">저장하기</button>
+    <button type="button" class="btn btn-default" id="modify">수정하기</button>
     <button type="button" class="btn btn-default" id="goList">목록</button>
   </form>
 </div>
@@ -35,16 +35,31 @@
 <script src="/js/bootstrap.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#register').click(function(e) {
+    let id = [[${id}]];
+    $.ajax({
+      type : 'GET',
+      url : '/api/v1/post/' + id,
+      dataType : 'json',
+      success : function(resp) {
+        console.log(resp.title);
+        $('input[name=title]').val(resp.title);
+        $('#textarea').text(resp.content);
+        $('input[name=author]').val(resp.author);
+      },
+      error : function(resp){
+        alert('error');
+      }
+    });
+
+    $('#modify').click(function(e) {
       let title = $('input[name=title]').val();
       let content = $('#textarea').val();
-      let author = $('input[name=author]').val();
 
-      let data = {'title' : title, 'content' : content, 'author' : author};
+      let data = {'title' : title, 'content' : content};
 
       $.ajax({
-        type : 'POST',
-        url : '/api/v1/post',
+        type : 'PUT',
+        url : '/api/v1/post/' + id,
         contentType : 'application/json; charset=UTF-8',
         dataType : 'json',
         data : JSON.stringify(data),

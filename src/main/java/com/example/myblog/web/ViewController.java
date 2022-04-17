@@ -23,4 +23,10 @@ public class ViewController {
 		model.addAttribute("id", id);
 		return "post";
 	}
+
+	@GetMapping("/posts/modify/{id}")
+	public String postModify(Model model, @PathVariable Long id) {
+		model.addAttribute("id", id);
+		return "postsModify";
+	}
 }
